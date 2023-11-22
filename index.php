@@ -10,12 +10,18 @@ if(isset($_POST['go'])){
       echo  "<script>alert('les deux mot de passe sont identiques')</script>";
     }
     else{
-        $sql = "INSERT into utilisateur values(NULL,$nom,$pnom,$email,$pass1)";
+       
+        $sql = "INSERT into utilisateur VALUES(NULL,'$nom','$pnom','$email','$pass1',NULL)";
         $req = mysqli_query($conn,$sql);
+
+        session_start() ;
         
-        $sql1 = "SELECT id from utilisateur where nom = $nom";
+        $sql1 = "SELECT LAST_INSERT_id() FROM utilisateur";
         $req  = mysqli_query($conn,$sql1);
-        $info = mysqli_fetch_assoc
+        $row = mysqli_fetch_row($req);
+        $_SESSION['id'] = $row[0];
+        header("Location: choix.php");
+        
     }
 
 }
@@ -35,8 +41,11 @@ if(isset($_POST['go'])){
 </head>
 <body>
     <header class="flex justify-center items-center h-screen ">
-        <div class="flex w-4/5 bg-zinc-600	p-4	">
+        
+        <div class=" w-4/5 bg-zinc-600	p-4	lg:flex">
             <form class="max-w-md mx-auto w-2/4	" method="post" action="">
+            <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900">créer votre compte</h1>
+
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="text" name="nom" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
