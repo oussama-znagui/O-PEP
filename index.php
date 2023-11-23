@@ -20,6 +20,9 @@ if(isset($_POST['go'])){
         $req  = mysqli_query($conn,$sql1);
         $row = mysqli_fetch_row($req);
         $_SESSION['id'] = $row[0];
+        $_SESSION['nom'] = $nom;
+        $_SESSION['pnom'] = $pnom;
+        
         header("Location: choix.php");
         
     }

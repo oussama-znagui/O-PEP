@@ -1,7 +1,11 @@
 <?php
-
-include 'config.php';
 session_start();
+include 'config.php';
+if(!$_SESSION['id']){
+    header("Location: index.php");
+}
+
+    
 $id = $_SESSION['id'];
 if(isset($_POST['client'])){
     $sql = "UPDATE utilisateur SET id_role = '2' WHERE id = $id";
@@ -10,6 +14,7 @@ if(isset($_POST['client'])){
     header("Location: client.php");
 
 }
+
 
 
 ?>
