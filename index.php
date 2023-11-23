@@ -11,7 +11,7 @@ if(isset($_POST['go'])){
     }
     else{
        
-        $sql = "INSERT into utilisateur VALUES(NULL,'$nom','$pnom','$email','$pass1',NULL)";
+        $sql = "INSERT into utilisateur  VALUES(NULL,'$nom','$pnom','$email','$pass1',NULL)";
         $req = mysqli_query($conn,$sql);
 
         session_start() ;
