@@ -43,6 +43,9 @@ include 'config.php'
                 <th scope="col" class="px-6 py-3">
                     Categorie
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Operation
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -75,7 +78,8 @@ include 'config.php'
                 <?php echo $row[9] ?>
                 </td>
                 <td class="px-6 py-4">
-                <a href="edit-plante.php">Edit</a>
+                <a class="mx-2 text-green-500" href="edit-plante.php?id=<?php echo $row[0] ?>">Edit</a>
+                <a class="mx-2 text-red-500" href="suprimer.php?id=<?php echo $row[0] ?>">Suprimer</a>
                 </td>
                
             </tr>
