@@ -10,10 +10,15 @@
         $origine = $_POST['origine'];
         $tep = $_POST['temperature'];
         $img = $_POST['img'];
-        $sql = "INSERT INTO `article` (`id`, `nom`, `Origine`, `img`, `Taille`, `Température`, `Prix`, `id_cat`) VALUES (NULL, $nom, $origine, $img, $taille, $tep, '12.5', '2') ";
-        $req = mysqli_query($conn,$sql);
-        echo '<script>alert("Plante ajoutée avec succes")</script>';
-        // header("Location: ajout-p.php");
+        
+        $sql1 = "INSERT INTO article (nom, Origine, img, Taille, Température, Prix, id_cat) VALUES ('$nom', '$origine', '$img', '$taille', '$tep', $prix, $categorie) ";
+        $req1 = mysqli_query($conn,$sql1);
+        if($req1){
+            echo '<script>alert("Plante ajoutée avec succes")
+            document.location.href="ajout-p.php";
+            </script>';
+        }
+               
         
     }
 
@@ -51,7 +56,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
         prix
       </label>
-      <input name="prix"  class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" >
+      <input name="prix"  class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type='number' step='0.1'>
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -87,7 +92,7 @@
             while($row=mysqli_fetch_row($req)){
             ?>
 
-        <option value='<?php echo $row[1]; ?>'><?php echo $row[1]; ?></option>
+        <option value='<?php echo $row[0]; ?>'><?php echo $row[1]; ?></option>
             <?php
             }
             ?>
