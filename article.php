@@ -1,6 +1,10 @@
 <?php
-include 'config.php'
-
+include 'config.php';
+session_start();
+include 'config.php';
+if($_SESSION['status'] != 'admin'){
+  header("Location: index.php");
+}
 
 
 ?>
@@ -15,6 +19,7 @@ include 'config.php'
     <title>O'PEP ADMIN</title>
 </head>
 <body>
+    
     <section class="flex flex-col justify-center items-center">
         
     <h1 class = " text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">Liste des produit</h1>

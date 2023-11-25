@@ -1,4 +1,10 @@
 <?php
+session_start();
+include 'config.php';
+if($_SESSION['status'] != 'admin'){
+  header("Location: index.php");
+}
+
     $id = $_GET['id'];
     include 'config.php';
     $sql = 'SELECT * from categorie';
