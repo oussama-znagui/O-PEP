@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(!$_GET['id']){
+      header("Location: article.php");
+    }
     $id = $_GET['id'];
     include 'config.php';
     

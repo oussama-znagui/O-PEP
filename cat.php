@@ -33,7 +33,7 @@ if($_SESSION['status'] != 'admin'){
                                 aria-current="page">Dashboard</a>
                             <a href="article.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Plantes</a>
-                            <a href="cat.php"
+                            <a href="catg.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">categorie</a>
                             <a href="users.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Gestion
@@ -70,8 +70,8 @@ if($_SESSION['status'] != 'admin'){
     
     <section class="flex flex-col justify-center items-center">
         
-    <h1 class = " text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">Liste des produit</h1>
-    <a href="ajout-p.php" class = " m-auto  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ">Ajouter une Plante</a>
+    <h1 class = " text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">Liste des categorie</h1>
+    <a href="ajout-p.php" class = " m-auto  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ">Ajouter une categorie</a>
 
 <div class="my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -83,19 +83,7 @@ if($_SESSION['status'] != 'admin'){
                 <th scope="col" class="px-6 py-3">
                     Plante
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Origine
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    taille
-                </th>
                 
-                <th scope="col" class="px-6 py-3">
-                    Prix
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Categorie
-                </th>
                 <th scope="col" class="px-6 py-3">
                     Operation
                 </th>
@@ -104,7 +92,7 @@ if($_SESSION['status'] != 'admin'){
         <tbody>
 
         <?php  
-  $sql = 'SELECT * from article JOIN categorie ON article.id_cat = categorie.id';
+  $sql = 'SELECT * from  categorie';
   $req = mysqli_query($conn,$sql);
 
   while(  $row = mysqli_fetch_row($req)){
@@ -117,19 +105,7 @@ if($_SESSION['status'] != 'admin'){
                 <td class="px-6 py-4">
                 <?php echo $row[1] ?>
                 </td>
-                <td class="px-6 py-4">
-                <?php echo $row[2] ?>
-                </td>
-                <td class="px-6 py-4">
-                <?php echo $row[4] ?>
-                </td>
                
-                <td class="px-6 py-4">
-                <?php echo $row[6] ?>
-                </td>
-                <td class="px-6 py-4">
-                <?php echo $row[9] ?>
-                </td>
                 <td class="px-6 py-4">
                 <a class="mx-2 text-green-500" href="edit-plante.php?id=<?php echo $row[0] ?>">Edit</a>
                 <a class="mx-2 text-red-500" href="suprimer.php?id=<?php echo $row[0] ?>">Suprimer</a>

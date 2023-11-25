@@ -1,5 +1,9 @@
 <?php
     include 'config.php';
+    session_start();
+    if($_SESSION['status'] != 'admin'){
+      header("Location: index.php");
+    }
     $sql = 'SELECT * from categorie';
     $req = mysqli_query($conn,$sql);
     if(isset($_POST['go'])){
@@ -34,7 +38,56 @@
     <title>Ajouter une plante</title>
 </head>
 <body class="bg-gray-200">
-    <section class="flex flex-col justify-center items-center h-screen" >
+<nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+
+                <div class="flex flex-1 items-center justify-between ">
+                    <div class="flex flex-shrink-0 items-center">
+                        <span class="font-black text-white rounded-md px-3 py-2 text-md ">O'pep</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                            <a href="admin.php" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Dashboard</a>
+                            <a href="article.php"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Plantes</a>
+                            <a href="catg.php.php"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">categorie</a>
+                            <a href="users.php"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Gestion
+                                des utilisateur</a>
+                        </div>
+
+                    </div>
+                    <div>
+                        <form action="logout.php" method="$post">
+                            <input
+                                class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                type="submit" name="logout" value="logout">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="space-y-1 px-2 pb-3 pt-2">
+                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                    aria-current="page">Dashboard</a>
+                <a href="#"
+                    class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium ">Team</a>
+                <a href="#"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
+                <a href="#"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+            </div>
+        </div>
+    </nav>
+    <section class="flex flex-col justify-center items-center " >
+      <h1 class="my-10 text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl">Ajouter une plante</h1>
     <form class="w-full max-w-lg bg-green-200 p-10 rounded" method="post" action="">
   
     <div class="w-full  px-3 mb-6 md:mb-0">
