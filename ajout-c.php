@@ -1,14 +1,27 @@
 <?php
-include 'config.php';
-session_start();
-include 'config.php';
-if($_SESSION['status'] != 'admin'){
-  header("Location: index.php");
-}
+    include 'config.php';
+    session_start();
+    if($_SESSION['status'] != 'admin'){
+      header("Location: index.php");
+    }
+ 
+    if(isset($_POST['go'])){
+        $nom = $_POST['nom'];
+       
+        
+        $sql1 = "INSERT INTO categorie (nom) VALUES ('$nom') ";
+        $req1 = mysqli_query($conn,$sql1);
+        if($req1){
+            echo '<script>alert("Plante ajoutée avec succes")
+            document.location.href="ajout-c.php";
+            </script>';
+        }
+               
+        
+    }
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +29,9 @@ if($_SESSION['status'] != 'admin'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <title>O'PEP ADMIN</title>
+    <title>Ajouter une plante</title>
 </head>
-<body>
+<body class="bg-gray-200">
 <nav class="bg-gray-800">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
@@ -33,7 +46,7 @@ if($_SESSION['status'] != 'admin'){
                                 aria-current="page">Dashboard</a>
                             <a href="article.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Plantes</a>
-                            <a href="catg.php"
+                            <a href="catg.php.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">categorie</a>
                             <a href="users.php"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Gestion
@@ -56,10 +69,10 @@ if($_SESSION['status'] != 'admin'){
 
         <div class="sm:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                     aria-current="page">Dashboard</a>
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
+                    class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium ">Team</a>
                 <a href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
                 <a href="#"
@@ -67,62 +80,22 @@ if($_SESSION['status'] != 'admin'){
             </div>
         </div>
     </nav>
+    <section class="flex flex-col justify-center items-center " >
+      <h1 class="my-10 text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl">Ajouter une categorie</h1>
+    <form class="w-full max-w-lg bg-green-200 p-10 rounded" method="post" action="">
+  
+    <div class="w-full  px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Nom de la categorie
+      </label>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="nom" type="text" >
+    </div>
     
-    <section class="flex flex-col justify-center items-center">
-        
-    <h1 class = " text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">Liste des categorie</h1>
-    <a href="ajout-c.php" class = " m-auto  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 ">Ajouter une categorie</a>
-
-<div class="my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    ID
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Plante
-                </th>
-                
-                <th scope="col" class="px-6 py-3">
-                    Operation
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-
-        <?php  
-  $sql = 'SELECT * from  categorie';
-  $req = mysqli_query($conn,$sql);
-
-  while(  $row = mysqli_fetch_row($req)){
-
-?>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <?php echo $row[0] ?>
-                </th>
-                <td class="px-6 py-4">
-                <?php echo $row[1] ?>
-                </td>
-               
-                <td class="px-6 py-4">
-                <a class="mx-2 text-green-500" href="edit-cat.php?id=<?php echo $row[0] ?>">Edit</a>
-                <a class="mx-2 text-red-500" href="suprimer-cat.php?id=<?php echo $row[0] ?>">Suprimer</a>
-                </td>
-               
-            </tr>
-            
-
-
-            <?php
-  }
-  ?>
     
-        </tbody>
-    </table>
-</div>
-
+  
+  <input type="submit" name='go' value="Ajouter" class='text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-5 '>
+</form>
     </section>
+    
 </body>
 </html>
