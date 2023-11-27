@@ -14,7 +14,9 @@ if(isset($_POST['client'])){
     header("Location: client.php");
 
 }
-
+if(isset($_POST['admin']))
+$sql = "UPDATE utilisateur SET id_role = '0' WHERE id = $id";
+$req = mysqli_query($conn,$sql);
 
 
 ?>
