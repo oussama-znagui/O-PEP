@@ -21,7 +21,8 @@ if(isset($_POST['go'])){
         }
         if($user[5] == 2){
             $_SESSION['status'] = 'client';
-            $_SESSION['fullname'] = $user[1];
+            $_SESSION['pnom'] = $user[1] ;
+            $_SESSION['nom'] = $user[2]  ;
             header("Location: client.php");
 
         }

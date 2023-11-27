@@ -42,6 +42,28 @@ CREATE TABLE article
     FOREIGN KEY (id_cat) REFERENCES categorie (id)
 )
 
+CREATE TABLE panier (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_client int,
+    FOREIGN KEY (id_client) REFERENCES utilisateur (id)
+)
+CREATE TABLE commande (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_panier int,
+    FOREIGN KEY (id_panier) REFERENCES panier (id)
+)
+CREATE TABLE plantePanier (
+    id_panier int,
+    id_plante int,
+    qte int,
+    PRIMARY KEY(id_plante),
+    PRIMARY KEY(id_panier),
+     FOREIGN KEY (id_panier) REFERENCES panier (id),
+      FOREIGN KEY (id_plante) REFERENCES article (id)
+)
+
+
+
 INSERT INTO categorie VALUES(NULL,"Plantes d'Intérieur");
 INSERT INTO categorie VALUES(NULL,"Plantes d'Extérieur");
 INSERT INTO categorie VALUES(NULL,"Plantes Succulentes et Cactus");
