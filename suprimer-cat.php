@@ -1,4 +1,5 @@
 <?php
+
     if(!$_GET['id']){
       header("Location: article.php");
     }
@@ -9,11 +10,11 @@
 
   
         
-        $sql1 = "DELETE from article where id = $id;        ";
+        $sql1 = "DELETE from categorie where id = $id;        ";
         $req1 = mysqli_query($conn,$sql1);
         if($req1){
-            echo '<script>alert("Plante Suprimée avec succes")
-            document.location.href="article.php";
+            echo '<script>alert("categorie Suprimée avec succes")
+            document.location.href="cat.php";
             </script>';
         }
                

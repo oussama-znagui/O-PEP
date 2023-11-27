@@ -1,19 +1,25 @@
 <?php
+session_start();
+include 'config.php';
+if($_SESSION['status'] != 'admin'){
+  header("Location: index.php");
+}
+
+    $id = $_GET['id'];
     include 'config.php';
-    session_start();
-    if($_SESSION['status'] != 'admin'){
-      header("Location: index.php");
-    }
- 
+    $sql = "SELECT * from categorie where id = $id";
+    $req = mysqli_query($conn,$sql);
+    $cat = mysqli_fetch_row($req);
+
     if(isset($_POST['go'])){
         $nom = $_POST['nom'];
        
         
-        $sql1 = "INSERT INTO categorie (nom) VALUES ('$nom') ";
+        $sql1 = "UPDATE categorie SET nom = '$nom' where id = $id;";
         $req1 = mysqli_query($conn,$sql1);
         if($req1){
-            echo '<script>alert("categorie ajoutée avec succes")
-            document.location.href="ajout-c.php";
+            echo '<script>alert("categorie modifiée avec succes")
+            document.location.href="edit-cat.php?id='. $id.'";
             </script>';
         }
                
@@ -69,10 +75,10 @@
 
         <div class="sm:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
                     aria-current="page">Dashboard</a>
                 <a href="#"
-                    class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium ">Team</a>
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
                 <a href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
                 <a href="#"
@@ -80,20 +86,20 @@
             </div>
         </div>
     </nav>
+<h1 class=" text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl">La categorie : <?php echo $cat[1]; ?></h1>
     <section class="flex flex-col justify-center items-center " >
-      <h1 class="my-10 text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl">Ajouter une categorie</h1>
-    <form class="w-full max-w-lg bg-green-200 p-10 rounded" method="post" action="">
+        
+    <form class="w-full max-w-lg bg-green-200 p-10 rounded my-4" method="post" action="">
   
     <div class="w-full  px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        Nom de la categorie
+        Nom de categorie
       </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="nom" type="text" >
+      <input value="<?php echo $cat[1]; ?>" class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="nom" type="text" >
     </div>
     
-    
-  
-  <input type="submit" name='go' value="Ajouter" class='text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-5 '>
+  <input type="submit" name='go' value="Modifier" class='text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-5 '>
+  <a href="cat.php">Liste des categories</a>
 </form>
     </section>
     
