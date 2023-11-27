@@ -6,17 +6,31 @@ if(!$_SESSION['id']){
 }
 
     
-$id = $_SESSION['id'];
+
 if(isset($_POST['client'])){
+    $id = $_SESSION['id'];
     $sql = "UPDATE utilisateur SET id_role = '2' WHERE id = $id";
     $req = mysqli_query($conn,$sql);
     $_SESSION['status'] = 'client';
+    $sql2 = "INSERT INTO panier VALUES (NULL,'$id')";
+    $req2 = mysqli_query($conn,$sql2);
+      
+      $sql3 = 'SELECT LAST_INSERT_ID()';
+      $req3 = mysqli_query($conn,$sql3);
+      $row = mysqli_fetch_row($req3);
+      $_SESSION['status'] = 'client';
+      $_SESSION['id'] = $id;
+
+       $_SESSION['panier'] = $row[0];
     header("Location: client.php");
 
+
 }
-if(isset($_POST['admin']))
-$sql = "UPDATE utilisateur SET id_role = '0' WHERE id = $id";
-$req = mysqli_query($conn,$sql);
+elseif (isset($_POST['admin'])) {
+     $sql = "UPDATE utilisateur SET id_role = '0' WHERE id = $id";
+    $req = mysqli_query($conn,$sql);
+}
+
 
 
 ?>
