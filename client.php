@@ -49,12 +49,48 @@ if($_SESSION['status'] != 'client'){
                     <button
                         class="border-gray-950 border-solid	border-2 rounded-full   text-black px-4 py-2 focus:outline-none">Panier</button>
                     <div
-                        class="z-10	 hidden group-focus-within:block  absolute bg-gray-50 w-96 z-1 shadow-lg animate-slideIn right-9		">
+                        class=" z-10	 hidden group-focus-within:block  absolute bg-gray-50 w-96 z-1 shadow-lg animate-slideIn right-9		">
                         <div class="col-span-2 p-5">
 
                             <h1 class="text-xl font-medium ">Panier d'achat</h1>
 
                             <div id="pa">
+                              <?php 
+                              
+                              $idp = $_SESSION['panier'];
+                              $sql = "SELECT * FROM plantepanier JOIN article JOIN categorie WHERE plantepanier.id_plante = article.id AND article.id_cat = categorie.id AND id_panier = $idp";
+                              $req = mysqli_query($conn,$sql);
+                              while($row = mysqli_fetch_row($req)){
+                              ?>
+
+                               <div class="border w-full rounded mt-5 flex p-4 justify-between items-center flex-wrap">
+                                <img src="<?php echo $row[6] ?>" class="w-12">
+                                <div class="w-2/3">
+                                  <h3 class="text-lg font-medium"><?php echo $row[4] ?></h3>
+                                  <p class="text-gray-600 text-xs"><?php echo $row[12] ?></p>
+                                </div>
+                                <div>
+                                  <?php
+                                    $total = $row[2]*$row[9];
+                                   ?>
+                                  <h4 class="text-lg font-medium"><?php echo $total ?> </h4>
+                                  <p>QTE : <?php echo $row[2] ?></p>
+                                  
+                                </div>
+                                <div>
+                                    <button id="vider" class="px-4 py-2 text-sm rounded-full bg-red-700">Vider</button>
+                                    <button 
+                                        class="px-4 py-2 text-sm rounded-full bg-green-300">Devis</button>
+
+                                </div>
+                              </div>
+
+                            <?php
+                              }
+
+
+                              ?>
+                             
 
                             </div>
                             <div class="flex flex-col justify-between items-center mt-6 pt-6 border-t gap-y-5">

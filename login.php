@@ -23,6 +23,7 @@ if(isset($_POST['go'])){
             $_SESSION['status'] = 'client';
             $_SESSION['pnom'] = $user[1] ;
             $_SESSION['nom'] = $user[2]  ;
+            // $_SESSION['panier'] = $user[2]  ;
             header("Location: client.php");
 
         }
