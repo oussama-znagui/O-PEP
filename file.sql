@@ -49,8 +49,8 @@ CREATE TABLE panier (
 )
 CREATE TABLE commande (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    id_panier int,
-    FOREIGN KEY (id_panier) REFERENCES panier (id)
+    id_PP int,
+    FOREIGN KEY (id_PP) REFERENCES panierplante (id_plantePanier)
 )
 CREATE TABLE plantePanier (
     id_panier int,
@@ -97,3 +97,5 @@ VALUES ("Fougère de Boston", "Amérique", "media/fern.jpg", "2-3 mètres", "Lum
        ("Tomate", "Amérique du Sud", "media/tomato.jpg", "1-3 mètres", "Plein soleil", 11.99)
 
 
+ALTER TABLE plantepanier
+DROP CONSTRAINT plantepanier_ibfk_1;
