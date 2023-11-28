@@ -78,9 +78,7 @@ if($_SESSION['status'] != 'client'){
                                   
                                 </div>
                                 <div>
-                                    <button id="vider" class="px-4 py-2 text-sm rounded-full bg-red-700">Vider</button>
-                                    <button 
-                                        class="px-4 py-2 text-sm rounded-full bg-green-300">Devis</button>
+                                   
 
                                 </div>
                               </div>
