@@ -92,6 +92,13 @@ if($_SESSION['status'] != 'client'){
                                   
                                 </div>
                                 <div>
+                                  <form action="" method="post">
+                                    <input class="text-red-600" type="submit" value='suprimer'>
+                                        <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
+
+                                  </form>
+                                </div>
+                                <div>
                                    
 
                                 </div>
