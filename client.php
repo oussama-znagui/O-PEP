@@ -16,6 +16,16 @@ if($_SESSION['status'] != 'client'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+      .w-96 {
+    width: 40rem !important;
+    }
+   @media only screen and (max-width: 600px) {
+      .w-96{
+        width: 15rem !important;
+      }
+}
+    </style>
 
     <title>O'pep</title>
 </head>
@@ -48,6 +58,7 @@ if($_SESSION['status'] != 'client'){
      <div tabindex="0" class="group relative inline-block p-5">
                     <button
                         class="border-gray-950 border-solid	border-2 rounded-full   text-black px-4 py-2 focus:outline-none">Panier</button>
+                        <a href="logout.php" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mx-5">logout</a>
                     <div
                         class=" z-10	 hidden group-focus-within:block  absolute bg-gray-50 w-96 z-1 shadow-lg animate-slideIn right-9		">
                         <div class="col-span-2 p-5">
@@ -60,21 +71,24 @@ if($_SESSION['status'] != 'client'){
                               $idp = $_SESSION['panier'];
                               $sql = "SELECT * FROM plantepanier JOIN article JOIN categorie WHERE plantepanier.id_plante = article.id AND article.id_cat = categorie.id AND id_panier = $idp";
                               $req = mysqli_query($conn,$sql);
+                              $somme = 0;
                               while($row = mysqli_fetch_row($req)){
+                                
                               ?>
 
                                <div class="border w-full rounded mt-5 flex p-4 justify-between items-center flex-wrap">
-                                <img src="<?php echo $row[6] ?>" class="w-12">
+                                <img src="<?php echo $row[7] ?>" class="w-12">
                                 <div class="w-2/3">
-                                  <h3 class="text-lg font-medium"><?php echo $row[4] ?></h3>
-                                  <p class="text-gray-600 text-xs"><?php echo $row[12] ?></p>
+                                  <h3 class="text-lg font-medium"><?php echo $row[5] ?></h3>
+                                  <p class="text-gray-600 text-xs"><?php echo $row[13] ?></p>
                                 </div>
                                 <div>
                                   <?php
-                                    $total = $row[2]*$row[9];
+                                    $total = $row[3]*$row[10];
+                                    $somme += $total;
                                    ?>
                                   <h4 class="text-lg font-medium"><?php echo $total ?> </h4>
-                                  <p>QTE : <?php echo $row[2] ?></p>
+                                  <p>QTE : <?php echo $row[3] ?></p>
                                   
                                 </div>
                                 <div>
@@ -101,7 +115,9 @@ if($_SESSION['status'] != 'client'){
 
 
                                 <div class="flex justify-center items-end">
-                                    <span class="text-sm font-medium text-black mr-1 ">Total HT: </span>
+                                    <span class="text-sm font-medium text-black mr-1 ">Total TTC: <?php
+                                    echo $somme;
+                                    ?></span>
                                     <span id="total" class="mx-2 text-lg font-bold text-gray-800 "></span>
 
                                 </div>

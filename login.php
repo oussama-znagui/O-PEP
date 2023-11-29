@@ -16,6 +16,7 @@ if(isset($_POST['go'])){
         if($user[5] == 1){
             $_SESSION['status'] = 'admin';
             $_SESSION['fullname'] = $user[1];
+            $_SESSION['id'] = $user[0];
             header("Location: admin.php");
 
         }
@@ -23,7 +24,12 @@ if(isset($_POST['go'])){
             $_SESSION['status'] = 'client';
             $_SESSION['pnom'] = $user[1] ;
             $_SESSION['nom'] = $user[2]  ;
-            // $_SESSION['panier'] = $user[2]  ;
+            $_SESSION['id'] = $user[0];
+            $panier_sql = "SELECT * from panier where id_client = $user[0]";
+            $panier_req = mysqli_query($conn,$panier_sql);
+            $panier = mysqli_fetch_row($panier_req);
+
+            $_SESSION['panier'] = $panier[0]  ;
             header("Location: client.php");
 
         }
