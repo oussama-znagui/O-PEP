@@ -43,7 +43,7 @@ if(isset($_POST['go'])){
     <title>Document</title>
 </head>
 <body>
-    <header class="flex justify-center items-center h-screen ">
+    <header class="flex justify-center items-center h-screen "> 
         
         <div class=" w-4/5 bg-zinc-600	p-4	lg:flex">
             <form class="max-w-md mx-auto w-2/4	" method="post" action="">

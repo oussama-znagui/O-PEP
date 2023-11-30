@@ -175,6 +175,13 @@ if($_SESSION['status'] != 'client'){
         <input type="submit" value='chercher' name='chercher' class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
     </div>
 </form>
+<div tabsindex="0" class="group relative inline-block p-5">
+        <button
+            class="border-gray-950 border-solid    border-2 rounded-full   text-black px-4 py-2 focus:outline-none">Filtrer</button>
+        
+        <div
+            class=" z-10     hidden group-focus-within:block  absolute bg-gray-50 w-96 z-1 shadow-lg animate-slideIn right-9        ">
+            
 <form action="" method="post" class=" my-10 w-/5 mx-auto  grid grid-cols-1 md:grid-cols-4 gap-4 my-8">
   <input value="tous les categorie" type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
   <?php
@@ -195,6 +202,11 @@ if($_SESSION['status'] != 'client'){
   ?>
   
 </form>
+
+</div>
+
+
+
 
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
