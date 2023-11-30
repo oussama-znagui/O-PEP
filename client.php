@@ -55,7 +55,7 @@ if($_SESSION['status'] != 'client'){
     <div class="relative flex items-center">
         <span class="mx-10"><?php echo "Bonjour " . $_SESSION['pnom']." ".$_SESSION['nom']  ?></span>
      
-     <div tabindex="0" class="group relative inline-block p-5">
+     <div tabsindex="0" class="group relative inline-block p-5">
                     <button
                         class="border-gray-950 border-solid	border-2 rounded-full   text-black px-4 py-2 focus:outline-none">Panier</button>
                         <a href="logout.php" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mx-5">logout</a>
@@ -76,7 +76,7 @@ if($_SESSION['status'] != 'client'){
                                 
                               ?>
 
-                               <div class="border w-full rounded mt-5 flex p-4 justify-between items-center flex-wrap">
+                               <div class="border w-full rounded mt-5 flex p-4 justify-between items-center ">
                                 <img src="<?php echo $row[7] ?>" class="w-12">
                                 <div class="w-2/3">
                                   <h3 class="text-lg font-medium"><?php echo $row[5] ?></h3>
@@ -92,8 +92,8 @@ if($_SESSION['status'] != 'client'){
                                   
                                 </div>
                                 <div>
-                                  <form action="" method="post">
-                                    <input class="text-red-600" type="submit" value='suprimer'>
+                                  <form action="" method="post" class="flex">
+                                    <input class="text-red-600 mx-5" type="submit" value='&#x274C;'>
                                         <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
 
                                   </form>
@@ -146,15 +146,18 @@ if($_SESSION['status'] != 'client'){
 
     </header>
     <main>
-      <section class ="p-10">
+      <section class ="p-10 flex flex-col justify-center items-center">
         <h1 class = " text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">NOS PLANTES</h1>
         <p class ="mb-3 text-gray-500 text-center w-2/4 mx-auto ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto voluptatibus deleniti eius voluptatem magnam consequatur. Quis ipsum neque minus, adipisci, officiis nostrum corporis asperiores veniam libero vitae blanditiis molestiae explicabo!</p>
         <?php
           $sql = 'SELECT * from article JOIN categorie ON article.id_cat = categorie.id';
           $req = mysqli_query($conn,$sql);
           if(@$_POST['chercher']){
+            
             $titre = $_POST['titre'];
-            $sql = "SELECT * from article JOIN categorie ON article.id_cat = categorie.id where article.nom like '{$titre}%' ";
+            $sql_rech = "SELECT * from article JOIN categorie ON article.id_cat = categorie.id where article.nom like '%$titre%'";
+            
+            $req = mysqli_query($conn,$sql_rech);
 
 
           }
@@ -169,8 +172,28 @@ if($_SESSION['status'] != 'client'){
             </svg>
         </div>
         <input type="search" name='titre' id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
-        <button type="submit" name='chercher' class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+        <input type="submit" value='chercher' name='chercher' class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
     </div>
+</form>
+<form action="" method="post" class=" my-10 w-/5 mx-auto  grid grid-cols-1 md:grid-cols-4 gap-4 my-8">
+  <input value="tous les categorie" type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+  <?php
+
+    $filtrage = "SELECT * from categorie";
+    $filtrage_req = mysqli_query($conn,$filtrage);
+    while($filtrage_rows = mysqli_fetch_row($filtrage_req)){
+  ?>
+<button type="submit" value="<?php echo $filtrage_rows[0] ?>" name = 'filtre' type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"><?php echo $filtrage_rows[1] ?></button>
+
+  <?php
+    }
+    if(isset($_POST['filtre'])){
+      $catig = $_POST['filtre'];
+      $sql3 = "SELECT * from article JOIN categorie ON article.id_cat = categorie.id WHERE categorie.id = $catig ";
+      $req = mysqli_query($conn,$sql3);
+    }
+  ?>
+  
 </form>
 
 
