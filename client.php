@@ -77,14 +77,14 @@ if($_SESSION['status'] != 'client'){
                               ?>
 
                                <div class="border w-full rounded mt-5 flex p-4 justify-between items-center ">
-                                <img src="<?php echo $row[7] ?>" class="w-12">
+                                <img src="<?php echo $row[8] ?>" class="w-12">
                                 <div class="w-2/3">
-                                  <h3 class="text-lg font-medium"><?php echo $row[5] ?></h3>
-                                  <p class="text-gray-600 text-xs"><?php echo $row[13] ?></p>
+                                  <h3 class="text-lg font-medium"><?php echo $row[6] ?></h3>
+                                  <p class="text-gray-600 text-xs"><?php echo $row[14] ?></p>
                                 </div>
                                 <div>
                                   <?php
-                                    $total = $row[3]*$row[10];
+                                    $total = $row[3]*$row[11];
                                     $somme += $total;
                                    ?>
                                   <h4 class="text-lg font-medium"><?php echo $total ?> </h4>
@@ -92,11 +92,7 @@ if($_SESSION['status'] != 'client'){
                                   
                                 </div>
                                 <div>
-                                  <form action="" method="post" class="flex">
-                                    <input class="text-red-600 mx-5" type="submit" value='&#x274C;'>
-                                        <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
-
-                                  </form>
+                                  <a href="commande.php?id=<?php echo $row[0] ?>" class="text-white bg-green-700 hover:bg-green-800  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mx-5">Commandez</a>
                                 </div>
                                 <div>
                                    
@@ -115,8 +111,7 @@ if($_SESSION['status'] != 'client'){
                             <div class="flex flex-col justify-between items-center mt-6 pt-6 border-t gap-y-5">
                                 <div>
                                     <button id="vider" class="px-4 py-2 text-sm rounded-full bg-red-700">Vider</button>
-                                    <button 
-                                        class="px-4 py-2 text-sm rounded-full bg-green-300">Devis</button>
+                                    
 
                                 </div>
 
@@ -190,7 +185,7 @@ if($_SESSION['status'] != 'client'){
     $filtrage_req = mysqli_query($conn,$filtrage);
     while($filtrage_rows = mysqli_fetch_row($filtrage_req)){
   ?>
-<button type="submit" value="<?php echo $filtrage_rows[0] ?>" name = 'filtre' type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"><?php echo $filtrage_rows[1] ?></button>
+<button type="submit" value="<?php echo $filtrage_rows[0] ?>" name = 'filtre' type="submit" class="text-white text-xs	 bg-green-700 hover:bg-green-800  font-medium  px-5 py-2.5 text-center me-2 mb-2"><?php echo $filtrage_rows[1] ?></button>
 
   <?php
     }

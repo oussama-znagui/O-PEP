@@ -12,7 +12,7 @@ $sql = "SELECT * from plantepanier where id_panier = $idp AND id_plante = $id_pl
 $req = mysqli_query($conn,$sql);
 $row = mysqli_fetch_row($req);
 if($row == 0){
-    $sql1 = "INSERT into plantepanier values(NULL,'$idp','$id_plante',1)";
+    $sql1 = "INSERT into plantepanier values(NULL,'$idp','$id_plante',1,0)";
     $req1 = mysqli_query($conn,$sql1);
      header('Location: client.php');
     
