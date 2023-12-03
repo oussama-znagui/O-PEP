@@ -69,7 +69,7 @@ if($_SESSION['status'] != 'client'){
                               <?php 
                               
                               $idp = $_SESSION['panier'];
-                              $sql = "SELECT * FROM plantepanier JOIN article JOIN categorie WHERE plantepanier.id_plante = article.id AND article.id_cat = categorie.id AND id_panier = $idp";
+                              $sql = "SELECT * FROM plantepanier JOIN article JOIN categorie WHERE plantepanier.id_plante = article.id AND article.id_cat = categorie.id AND id_panier = $idp AND plantepanier.statut = 0";
                               $req = mysqli_query($conn,$sql);
                               $somme = 0;
                               while($row = mysqli_fetch_row($req)){
