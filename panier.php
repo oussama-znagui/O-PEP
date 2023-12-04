@@ -16,7 +16,14 @@ if($row == 0){
     $req1 = mysqli_query($conn,$sql1);
      header('Location: client.php');
     
-}else{
+}
+if ($row['4'] == 1) {
+    $sql1 = "INSERT into plantepanier values(NULL,'$idp','$id_plante',1,0)";
+    $req1 = mysqli_query($conn,$sql1);
+     header('Location: client.php');
+    
+}
+if ($row['4'] == 0){
     $qte = $row[3];
     $qte++;
     $sql2 = "UPDATE plantepanier SET qte = $qte where id_panier = $idp AND id_plante = $id_plante";

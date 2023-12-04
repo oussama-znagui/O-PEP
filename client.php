@@ -110,7 +110,7 @@ if($_SESSION['status'] != 'client'){
                             </div>
                             <div class="flex flex-col justify-between items-center mt-6 pt-6 border-t gap-y-5">
                                 <div>
-                                    <button id="vider" class="px-4 py-2 text-sm rounded-full bg-red-700">Vider</button>
+                                   <a href="cmd.php" class=''>Historique des commandes</a>
                                     
 
                                 </div>
@@ -133,7 +133,7 @@ if($_SESSION['status'] != 'client'){
   </div>
 </nav>
         <div class="flex justify-between items-center w-4/5 mx-auto my-10">
-            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white lg:text-4xl ">Éveillez la vie,<br>cultivez l'avenir
+            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 lg:text-4xl ">Éveillez la vie,<br>cultivez l'avenir
                 <br><span class=" text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 ">Votre pépinière <br>de rêves verdoyants.</span></h1>
                 <img class="w-1/3	" src="media/image.png" alt="">
         </div>
