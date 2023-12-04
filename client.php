@@ -110,7 +110,7 @@ if($_SESSION['status'] != 'client'){
                             </div>
                             <div class="flex flex-col justify-between items-center mt-6 pt-6 border-t gap-y-5">
                                 <div>
-                                   <a href="cmd.php" class=''>Historique des commandes</a>
+                                   <a href="cmd.php" class='text-blue-300'>Historique des commandes</a>
                                     
 
                                 </div>
